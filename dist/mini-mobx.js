@@ -13,6 +13,7 @@ function observable(target, name, descriptor){
 			return observableObj.get();
 		},
 		set:function(value){
+
 			//如果重新赋值了一个对象，也递归对象所有属性，把它们变成observable
 			if(typeof value === 'object'){
 				recursiveObj(value);
@@ -117,10 +118,10 @@ function watch(target, name, descriptor){
 	let obj = descriptor.initializer.call(this);
 	Object.keys(obj).forEach(item => {
 		let cb = obj[item];
-		
+
 		let Watch = new WatchObj(cb,target,item);
 	})
-	
+
 	return descriptor;
 }
 
@@ -161,11 +162,11 @@ class b{
 		setTimeout(() => {
 			console.log('改变之后'+this.a);
 			this.b = 5
-			
+
 			setTimeout(() => {
 				console.log('改变之后'+this.a);
 				this.b = 9
-				
+
 			}, 2000);
 		}, 2000);
 	}
